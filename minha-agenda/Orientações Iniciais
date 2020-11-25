@@ -1,0 +1,17 @@
+1) crie um array vazio chamado "contatos";
+2) Adicione um evento click ao botão "Salvar";
+3) Quando o botão "Salvar" for clicado, guarde em memória as informações vindas dos campos "Nome" e "Telefone" da interface;
+4) SE a variável que guardar o nome digitado estiver vazia, mostre um alerta com a mensagem "Nome é obrigatório";
+5) CASO CONTRÁRIO, SE a variável que guardar o telefone digitado estiver vazia, mostre um alerta com a mensagem "Telefone é obrigatório";
+6) CASO CONTRÁRIO, crie um objeto chamado "infoContato" com duas propriedades "nome" e "telefone" e atribua a elas os respectivos valores coletados na interface;
+7) Utilizando os métodos disponíveis no tipo Array, verifique se o nome do novo contato já está na lista e se estiver, mostre um alerta com a mensagem "Contato já está em sua lista";
+8) CASO CONTRÁRIO, adicione o objeto "infoContato" ao array "contatos" e chame a função "exibirContatos" que será criada a seguir;
+9) Crie a função "exibirContatos" e dentro dela crie uma variável com o valor de string vazia;
+10) Percorra o array "contatos" e para cada contato crie uma <TR> com a estrutura abaixo e concatene esse valor à variável criada no passo anterior:
+        <tr>
+            <td>NOME</td>
+            <td>TELEFONE</td>
+        </tr>
+   Substitua "NOME" e "TELEFONE" pelos valores coletados correspondentes.
+   
+11) Exiba o valor concatenado com as <TR> na tabela da interface.

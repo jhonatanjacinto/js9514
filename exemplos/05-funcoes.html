@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+<h1>Funções no JavaScript</h1>
+<script>
+
+    'use strict';
+
+    // function declaration (HOISTING)
+    mostrarMensagem();
+    function mostrarMensagem() {
+        console.log(this);
+        console.log('Minha mensagem teste');
+    }
+
+
+    // function expression (NÃO TEM HOISTING)
+    // mostrarOutraMensagem(); // Dá pau
+    const mostrarOutraMensagem = function() {
+        console.log(this)
+        console.log('Mostrando outra mensagem');
+    }
+    mostrarOutraMensagem();
+
+    // Arrow Function (ES6) (NÃO TEM HOISTING)
+    const dizerOla = () => {
+        console.log(this); // window
+        console.log('Olá, pessoas!');
+    }
+    dizerOla();
+
+    // 1) Se tem 1 parâmetro, pode-se omitir os parênteses
+    const dizerNome = nome => {
+        console.log('Seu nome é: ', nome);
+    }
+    dizerNome('Jhonatan');
+
+    // 2) Se ela tem 1 linha de execução só e/ou é de retorno, pode-se omitir as chaves
+    const dizerNome2 = nome => console.log('Seu nome é: ', nome);
+    dizerNome2('Fabiana');
+
+    const somar = (v1 = 10, v2) => v1 + v2;
+    console.log('Total: ', somar(5, 7));
+
+</script>

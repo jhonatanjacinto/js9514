@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<h1>Eventos no JavaScript</h1>
+<button id="btn1">
+    Botão 1
+</button>
+
+<button id="btn2">
+    Botão 2
+</button>
+
+
+<script>
+
+    function enviarEmailAdmin() {
+        console.log('Enviando e-mail para o administrador do sistema...');
+    }
+
+    function salvarDadosDb() {
+        console.log('Salvando dados na base de dados!!!');
+    }
+
+    // event handler/inline
+    btn1.onclick = enviarEmailAdmin;
+    btn1.onclick = salvarDadosDb;
+
+    // Event Listeners
+    btn2.addEventListener('click', enviarEmailAdmin);
+    btn2.addEventListener('click', salvarDadosDb);
+
+
+
+</script>
