@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria | Faça seu Pedido</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        .btn-pedido { right: 15px; top: 15px; }
+    </style>
+    <script src="js/main-index.js" defer></script>
+</head>
+<body>
+    
+    <main class="container">
+        <header class="jumbotron py-4 position-relative">
+            <img src="imagens/logo-pizzaria.png" width="200" class="mx-auto d-block" />
+            <hr class="my-4">
+            <p class="lead text-center">
+                Utilize as opções disponíveis abaixo para selecionar seus produtos e realizar seu pedido.
+            </p>
+            <a href="acompanhar-pedido.html" class="btn btn-primary btn-lg position-absolute btn-pedido">
+                Acompanhe seu pedido
+            </a>
+        </header>
+
+        <section class="card mb-4">
+            <h4 class="card-header">
+                <span class="badge badge-primary">1</span>
+                Escolha os produtos
+            </h4>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="seletor_produto">* Selecione um produto:</label>
+                        <select class="form-control custom-select" id="seletor_produto">
+                            <option value="">--</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="input_quantidade">* Quantidade:</label>
+                        <input type="number" class="form-control" id="input_quantidade" value="1" min="1" />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button id="btnAdicionarProduto" class="btn btn-primary btn-lg mt-4 w-100">
+                            Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card mb-4">
+            <h4 class="card-header">
+                <span class="badge badge-primary">2</span>
+                Produtos do Seu Pedido
+            </h4>
+            <div class="card-body p-4">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Produto</th>
+                            <th>Qtd</th>
+                            <th>Preço Unit.</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyProdutos">
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-right table-dark"><strong>Total do Pedido:</strong></td>
+                            <td class="table-secondary" id="tdTotalPedido">R$ 0,00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <section class="card mb-4">
+            <h4 class="card-header">
+                <span class="badge badge-primary">3</span>
+                Informações adicionais
+            </h4>
+            <div id="formPedido" class="card-body p-4">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="input_nomeCompleto">* Nome completo:</label>
+                        <input type="text" class="form-control" placeholder="Digite seu nome" id="input_nomeCompleto" required data-mensagem="Nome é obrigatório!" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="input_email">* E-mail:</label>
+                        <input type="email" class="form-control" placeholder="Digite seu e-mail" id="input_email" required data-mensagem="E-mail inválido!" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="input_telefone">* Telefone/Celular:</label>
+                        <input type="tel" class="form-control" placeholder="(00) 9?0000-0000" id="input_telefone" required data-mensagem="Telefone inválido!" />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="input_cep">* CEP:</label>
+                        <input type="text" class="form-control" maxlength="8" placeholder="00000000" id="input_cep" required data-mensagem="CEP inválido!" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="input_endereco">* Endereço:</label>
+                        <input type="text" class="form-control" placeholder="..." id="input_endereco" disabled required data-mensagem="Endereço é obrigatório!" />
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="input_numero">* Nº:</label>
+                        <input type="number" class="form-control" placeholder="..." id="input_numero" disabled required data-mensagem="Número é obrigatório!">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="input_complemento">Complemento:</label>
+                        <input type="text" class="form-control" placeholder="..." id="input_complemento" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="input_bairro">* Bairro:</label>
+                        <input type="text" class="form-control" placeholder="..." id="input_bairro" disabled required data-mensagem="Bairro é obrigatório!">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="input_cidade">* Cidade:</label>
+                        <input type="text" class="form-control" placeholder="..." id="input_cidade" disabled required data-mensagem="Cidade é obrigatório!">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="seletor_estado">* Estado:</label>
+                        <select class="form-control custom-select" id="seletor_estado" disabled required data-mensagem="Estado é obrigatório!">
+                            <option>--</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="input_observacoes">Observações:</label>
+                        <textarea class="form-control" id="input_observacoes" placeholder="Ex: por favor, colocar poucas azeitonas na pizza"></textarea>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <button id="btnEnviarPedido" class="btn btn-success btn-lg mt-4 w-100">
+                            Enviar Pedido
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card mb-4">
+            <h4 class="card-header">
+                <span class="badge badge-primary">4</span>
+                Finalização
+            </h4>
+            <div class="card-body p-4" id="divFinalizacaoPedido">
+                
+            </div>
+        </section>
+    </main>
+
+    
+
+</body>
+</html>
