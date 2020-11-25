@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<h1>JavaScript: if, switch e o ternário</h1>
+<script>
+
+    let idade = 16;
+
+    if (idade < 18) {
+        document.write('Você é menor de idade!');
+    }
+    else {
+        document.write('Você é maior de idade!');
+    }
+
+    // Operador ternário
+    let sexo = 'M';
+    let mensagem = (sexo === 'M') ? "Você é um Homem" : "Você é uma Mulher";
+    document.write('<br>' + mensagem);
+
+    // switch
+    let estado = 'SP';
+
+    switch(estado)
+    {
+        case 'RJ':
+        case 'ES': 
+        case 'MG':
+        case 'SP':
+            document.write('<br>Sua região é a Sudeste');
+        break;
+        case 'RS':
+            document.write('<br>Sua Região é a Sul');
+        break;
+        default:
+            document.write('Região não definida!');
+        break;
+    }
+
+
+
+</script>

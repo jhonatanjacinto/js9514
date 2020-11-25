@@ -1,0 +1,84 @@
+<meta charset="utf-8">
+<h1>JavaScript: variáveis, constantes e tipos</h1>
+<script>
+
+    /*
+        'use strict' ativa:
+        1) Proíbe a declaração de variáveis sem um comando declaratório explícito;
+        2) Proíbe o comando with();
+        3) Proíbe parâmetros duplicados em funções;
+        4) Muda o comportamento da palavra-chave "this";
+    */
+    'use strict';
+
+    // Variáveis com "var" respeitam só 2 tipos de escopo: local (dentro de uma função) ou global
+    var a = 555;
+    console.log('Valor de a:', a);
+
+    if (true) {
+        var b = a;
+    }
+
+    console.log('Valor de b:', b);
+
+    function teste1() {
+        console.log(this);
+        var c = 888;
+        console.log('Valor da variável c (função):', c); // Ok
+    }
+
+    teste1();
+
+    // console.log('Valor da variável c:', c); // ReferenceError
+
+    // ES6: "let" pra declaração de variáveis
+    // Variáveis com "let" respeitam qualquer escopo
+    let c = 777; // global
+    if (true) {
+        let d = c; // ok
+        console.log('Valor de d:', d); // Ok
+    }
+
+    // console.log('Valor de d fora do escopo: ', d); // ReferenceError
+
+    // ES6: constantes (declaração com o comando "const")
+    const x = 666;
+    // x = 999;
+    console.log('Valor da constante: ', x);
+
+    const lista = ['Adriana', 'Rodrigo', 'José', 'Carlos'];
+    lista[0] = 'Jhonatan'; // Ok
+    console.log(lista);
+
+    // lista = []; // TypeError
+
+    // Objetos Literais/Genéricos
+    const pessoa = {
+        // propriedades
+        nome: 'Henrique',
+        idade: 28,
+        email: 'henrique.oliveira@gmail.com',
+
+        // métodos (ES5)
+        dizerOla: function() {
+            console.log('Olá, meu nome é: ', this.nome);
+        },
+
+        // métodos (ES6)
+        dizerTchau() {
+            console.log('Tchau pessoas!');
+        }
+    }
+
+    pessoa.nome = 'Rafael';
+    pessoa.cidade = "Barueri"; // ok
+    console.log(pessoa);
+    console.log('A idade da pessoa é: ', pessoa.idade);
+    pessoa.dizerOla();
+    pessoa.dizerTchau();
+
+    // pessoa = {}; // TypeError
+
+
+
+</script>

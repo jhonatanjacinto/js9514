@@ -1,0 +1,50 @@
+<meta charset="utf-8">
+<h1>JavaScript: loopings</h1>
+
+<script>
+
+    // for: contagens
+    for (let i = 1; i <= 5; i++)
+    {
+        console.log('Valor de i', i);
+    }
+
+    // while: generalista (validações repetitivas, contagens, etc)
+    let letras = ['g', 'a', 't', 'o'];
+    let palavra = '';
+
+    while(palavra != 'gato')
+    {
+        palavra += letras.shift();
+        alert('Palavra sendo montada: ' + palavra);
+    }
+
+    alert('Palavra pronta: ' + palavra);
+
+    // for...of para objetos iteráveis: String, Arrays, Map, Set, etc.
+    const nomes = ['Pedro', 'Ana', 'Giovana'];
+
+    for (let nome of nomes)
+    {
+        console.log('Nome: ' + nome);
+    }
+
+    let cpf = '12345678900';
+
+    for (let numero of cpf) 
+    {
+        console.log(numero);
+    }
+
+    // for...in para percorrer propriedades de objetos
+    const obj1 = {
+        titulo: 'Meu título',
+        descricao: 'Minha descrição'
+    }
+
+    for (let prop in obj1)
+    {
+        console.log(prop);
+    }
+
+</script>
