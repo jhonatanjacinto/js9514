@@ -32,11 +32,11 @@ btnAdicionarProduto.addEventListener('click', function() {
     let quantidade = parseInt(input_quantidade.value);
 
     const produtoSelecionado = listaProdutos.find(p => p.id === id_produto);
-    
+
     if (!produtoSelecionado) {
         alert('ID do produto é inválido!');
     }
-    else if (quantidade <= 0) {
+    else if (quantidade <= 0 || isNaN(quantidade)) {
         alert('Quantidade inválida! Por favor, informe uma quantidade maior ou igual a 1.');
     }
     else {
