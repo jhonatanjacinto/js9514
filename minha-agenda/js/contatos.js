@@ -1,28 +1,19 @@
-const moduloContatos = (function() {
+const contatos = [];
 
-    const contatos = [];
+export function adicionarContato(nome, telefone) 
+{
+    const infoContato = { nome, telefone };
+    let contatoExiste = contatos.some(c => c.nome.toUpperCase() === nome.toUpperCase());
 
-    function adicionarContato(nome, telefone) 
-    {
-        const infoContato = { nome, telefone };
-        let contatoExiste = contatos.some(c => c.nome.toUpperCase() === nome.toUpperCase());
-
-        if (contatoExiste) {
-            alert('Contato já existe na sua agenda!');
-        }
-        else {
-            contatos.push(infoContato);
-        }
+    if (contatoExiste) {
+        alert('Contato já existe na sua agenda!');
     }
-
-    function getContatos()
-    {
-        return contatos;
+    else {
+        contatos.push(infoContato);
     }
+}
 
-    return {
-        adicionarContato,
-        getContatos
-    }
-
-})();
+export function getContatos()
+{
+    return contatos;
+}
