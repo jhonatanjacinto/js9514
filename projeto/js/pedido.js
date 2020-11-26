@@ -1,31 +1,20 @@
-const moduloPedido = (function() {
+const pedido = {
+    produtos: []
+}
 
-    const pedido = {
-        produtos: []
+export function adicionarProduto(produto)
+{
+    if (!pedido.produtos.includes(produto)) {
+        pedido.produtos.push(produto);
     }
+}
 
-    function adicionarProduto(produto)
-    {
-        if (!pedido.produtos.includes(produto)) {
-            pedido.produtos.push(produto);
-        }
-    }
+export function getProdutos()
+{
+    return pedido.produtos;
+}
 
-    function getProdutos()
-    {
-        return pedido.produtos;
-    }
-
-    function getTotal()
-    {
-        return pedido.produtos.reduce((totalPedido, p) => totalPedido + (p.preco * p.quantidade), 0);
-    }
-
-    return {
-        pedido,
-        adicionarProduto,
-        getProdutos,
-        getTotal
-    }
-
-})();
+export function getTotal()
+{
+    return pedido.produtos.reduce((totalPedido, p) => totalPedido + (p.preco * p.quantidade), 0);
+}
