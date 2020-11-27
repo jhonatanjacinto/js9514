@@ -2,6 +2,10 @@ import { adicionarProduto } from './pedido.js';
 import { exibirProdutosDoPedido } from './tabelaProdutosPedido.js';
 import { formataMoeda } from './utils/formataMoeda.js';
 
+const seletor_produto = document.querySelector('#seletor_produto');
+const btnAdicionarProduto = document.querySelector('#btnAdicionarProduto');
+const input_quantidade = document.querySelector('#input_quantidade');
+
 const listaProdutos = [
     { id: 1, nome: 'Pizza de Calabresa', foto: 'pizza-calabresa.jpg', preco: 52.99 },
     { id: 2, nome: 'Pizza 4 Queijos', foto: 'pizza-4-queijos.jpg', preco: 65.82 },

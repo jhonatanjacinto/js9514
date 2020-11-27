@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<h1>Front-end: Web Storage API</h1>
+
+<select id="seletorTema">
+    <option value="">-- Selecione um Tema --</option>
+    <option value="green">Tema verde</option>
+    <option value="red">Tema vermelho</option>
+</select>
+
+<script>
+
+    const seletor = document.querySelector('#seletorTema');
+    let corEscolhida = localStorage.getItem('cor_do_tema');
+    document.body.style.backgroundColor = corEscolhida;
+
+    seletor.onchange = () => {
+        let corTema = seletor.value.trim();
+
+        if (corTema == '') {
+            alert('Por favor, selecione um tema específico!');
+        }
+        else {
+            document.body.style.backgroundColor = corTema;
+            localStorage.setItem('cor_do_tema', corTema);
+        }
+    }
+
+</script>

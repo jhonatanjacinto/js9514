@@ -1,0 +1,43 @@
+<meta charset="utf-8">
+<h1>JavaScript no Front-end</h1>
+
+<p>Parágrafo 1</p>
+<p class="vermelho">Parágrafo 2</p>
+<p>Parágrafo 3</p>
+<p class="vermelho">Parágrafo 4</p>
+<p>Parágrafo 5</p>
+<span>Span sem classe</span>
+<span class="vermelho">Span com classe vermelho</span>
+<div id="minhaDiv">
+    DIV com ID e outro conteúdo 
+</div>
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+</ul>
+
+<style>
+    .vermelho { color: red; }
+    #minhaDiv { background-color: yellow; }
+</style>
+
+<script>
+    
+    // querySelector(seletor) | querySelectorAll(seletor)
+    const paragrafo = document.querySelector('p');
+    paragrafo.innerText = 'JavaScript trocou o texto desse parágrafo...';
+    paragrafo.style.fontStyle = 'italic';
+
+    const vermelhos = document.querySelectorAll('p.vermelho');
+    console.log(vermelhos);
+
+    for (let elemento of vermelhos)
+    {
+        elemento.innerHTML = 'Trocando o texto dos parágrafos vermelhos...';
+    }
+
+    vermelhos.forEach(elemento => elemento.innerHTML = 'Trocando o texto com forEach...');
+
+</script>
