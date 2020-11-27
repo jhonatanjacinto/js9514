@@ -1,0 +1,4 @@
+1) Guardar as referências dos elementos da interface usando os recursos da DOM API
+2) Usar EVENT DELEGATION para remoção de itens da agenda
+3) Persistir das informações usando Storage API 
+4) Criar o método de remoção de itens no módulo correto.

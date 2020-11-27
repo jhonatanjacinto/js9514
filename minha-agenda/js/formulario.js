@@ -1,6 +1,10 @@
 import { adicionarContato } from "./contatos.js";
 import { exibirContatos } from "./tabela.js";
 
+const inputNome = document.querySelector('#inputNome');
+const inputTelefone = document.querySelector('#inputTelefone');
+const btnSalvar = document.querySelector('#btnSalvar');
+
 btnSalvar.addEventListener('click', function() {
     let nome = inputNome.value.trim();
     let telefone = inputTelefone.value.trim();
