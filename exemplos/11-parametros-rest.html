@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<h1>Parâmetros REST</h1>
+
+<script>
+
+    // o parâmetro REST é sempre um ARRAY
+    function somarNumeros(...valores)
+    {
+        let resultado = valores.reduce((total, valor) => total + valor, 0);
+        console.log('Resultado da Soma:', resultado);
+    }
+
+    somarNumeros(5, 8);
+    somarNumeros(8, 7, 10, 5, 12);
+    somarNumeros(9, 3, 4);
+
+    const numeros = [2, 2, 3];
+    somarNumeros(...numeros); // spread operator
+
+    // Parâmetros REST devem ser sempre o ÚLTIMO parâmetro de uma função
+    function regiaoEstados(regiao, ...estados)
+    {
+        console.log(`
+        Região: ${regiao}
+        Estados: ${estados.join(', ')}
+        `);
+    }
+
+    regiaoEstados('Sudeste', 'São Paulo', 'Minas Gerais', 'Espirito Santo', 'Rio de Janeiro');
+    regiaoEstados('Sul', 'RS', 'SC', 'PR');
+
+</script>

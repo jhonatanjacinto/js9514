@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<h1>Spread Operator</h1>
+
+<script>
+
+    // É aplicável somente a objetos iteráveis: Array, String, NodeList, Map, Set, etc.
+
+    const nomes = ['Adriana', 'Roberto', 'Valéria'];
+    const listaCompleta = ['Mara', 'Mateus', 'Bianca', ...nomes, 'Gabriel'];
+
+    console.log(listaCompleta);
+
+    function exibirNomes(nome1, nome2, nome3) 
+    {
+        console.log('O nome 1 é: ', nome1);
+        console.log('O nome 2 é: ', nome2);
+        console.log('O nome 3 é: ', nome3);
+    }
+
+    exibirNomes( ...listaCompleta );
+    exibirNomes( ..."Caelum" );
+
+</script>

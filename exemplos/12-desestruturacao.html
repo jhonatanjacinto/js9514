@@ -1,0 +1,37 @@
+<meta charset="utf-8">
+<h1>Desestruturação (Arrays e Objetos)</h1>
+
+<script>
+
+    const usuario = {
+        username: 'marcio.oliveira',
+        id: 5265,
+        nome: 'Marcio',
+        sobrenome: 'Oliveira',
+        isAtivo: true,
+        endereco: {
+            logradouro: 'Rua Cruz Verde',
+            numero: 54,
+            complemento: 'N/A',
+            cidade: 'Osasco',
+            estado: 'SP'
+        }
+    }
+
+    // let username = usuario.username;
+    // let cidade = usuario.endereco.cidade;
+    // let estado = usuario.endereco.estado;
+
+    let { username: user, id, endereco: { cidade, estado } } = usuario;
+
+    console.log('ID: ', id);
+    console.log('Username: ', user);
+    console.log('Cidade:', cidade);
+    console.log('Estado:', estado);
+
+    // Desestruturação de Array
+    const valores = [12, 50, 5, 13, 80, 29, 61];
+    let [doze, cinquenta, , treze, ...resto] = valores;
+    console.log(doze, cinquenta, treze, resto);
+
+</script>
