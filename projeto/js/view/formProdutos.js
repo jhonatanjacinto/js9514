@@ -1,6 +1,6 @@
-import { adicionarProduto } from './pedido.js';
+import * as PedidoController from '../controller/PedidoController.js';
 import { exibirProdutosDoPedido } from './tabelaProdutosPedido.js';
-import { formataMoeda } from './utils/formataMoeda.js';
+import { formataMoeda } from '../utils/formataMoeda.js';
 
 const seletor_produto = document.querySelector('#seletor_produto');
 const btnAdicionarProduto = document.querySelector('#btnAdicionarProduto');
@@ -40,7 +40,7 @@ btnAdicionarProduto.addEventListener('click', function() {
     }
     else {
         produtoSelecionado.quantidade = quantidade;
-        adicionarProduto(produtoSelecionado);
+        PedidoController.adicionarProduto(produtoSelecionado);
         exibirProdutosDoPedido();
     }
 });

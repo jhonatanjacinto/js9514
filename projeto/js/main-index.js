@@ -1,2 +1,2 @@
-import './formProdutos.js';
-import './tabelaProdutosPedido.js';
+import './view/formProdutos.js';
+import './view/tabelaProdutosPedido.js';

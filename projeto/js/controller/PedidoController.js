@@ -1,4 +1,6 @@
-const pedido = JSON.parse(localStorage.getItem('dados_pedido')) ?? { produtos: [] };
+import Pedido from "../model/Pedido.js";
+
+const pedido = JSON.parse(localStorage.getItem('dados_pedido')) ?? new Pedido();
 
 export function adicionarProduto(produto)
 {
