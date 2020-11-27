@@ -1,0 +1,56 @@
+<meta charset="utf-8">
+<h1>Orientação a Objeto com JavaScript</h1>
+
+<script>
+
+    // Função Construtora de Objetos (ES5)
+    function Carro(modelo = '', marca = '', ano = 0)
+    {
+        this.modelo = modelo;
+        this.marca = marca;
+        this.ano = ano;
+        this.andar = function() {
+            console.log('O carro ' + this.modelo + ' está andando...');
+        };
+        this.parar = function() {
+            console.log('O carro ' + this.modelo + ' está parando...');
+        }
+    }
+
+    function registrarCarro(carro)
+    {
+        if (carro instanceof Carro === false) {
+            alert('Carro inválido!');
+            return;
+        }
+
+        console.log('Registrando carro no banco de dados...');
+        console.log('Modelo: ', carro.modelo);
+        console.log('Marca: ', carro.marca);
+        console.log('Ano: ', carro.ano);
+
+        console.log('Ativando e testando o carro...');
+        carro.andar();
+        carro.parar();
+    }
+
+    // Objeto Genérico / Literal
+    const carro1 = {
+        modelo: 'Onix',
+        marca: 'Chevrolet',
+        ano: 2019,
+        andar() {
+            console.log('O carro ' + this.modelo + ' está andando...');
+        },
+        parar() {
+            console.log('O carro ' + this.modelo + ' está parando...');
+        }
+    }
+
+    const carro2 = new Carro('Palio', 'Fiat', 2014);
+    registrarCarro({}); // falha
+    registrarCarro(carro2); // Ok
+
+    
+
+</script>

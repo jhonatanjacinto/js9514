@@ -33,9 +33,8 @@ export function exibirProdutosDoPedido()
     tbodyProdutos.innerHTML = tr;
 }
 
-tbodyProdutos.addEventListener('click', (event) => {
-    if (event.target.innerText.trim().toLowerCase() === 'remover') {
-        let indice = event.target.dataset.indice;
+tbodyProdutos.addEventListener('click', ({ target: { innerText, dataset: { indice } } }) => {
+    if (innerText.trim().toLowerCase() === 'remover') {
         moduloPedido.removerProduto(indice);
         exibirProdutosDoPedido();
     }
