@@ -1,0 +1,5 @@
+Atribuir às camadas certas as suas responsabilidades
+    - controller: validações
+    - view: captura e exibição de informações pro usuário (também exibe o erro gerado pela controller)
+
+Criar o erro customizado "ContatoError"
