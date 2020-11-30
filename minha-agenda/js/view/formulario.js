@@ -1,4 +1,4 @@
-import { adicionarContato } from "./contatos.js";
+import * as ContatosController from "../controller/ContatosController.js";
 import { exibirContatos } from "./tabela.js";
 
 const inputNome = document.querySelector('#inputNome');
@@ -16,7 +16,7 @@ btnSalvar.addEventListener('click', function() {
         alert('Telefone é obrigatório!');
     }
     else {
-        adicionarContato(nome, telefone);
+        ContatosController.adicionarContato(nome, telefone);
         exibirContatos();
     }
 });

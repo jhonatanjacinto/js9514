@@ -1,0 +1,9 @@
+Dividir a aplicação em Model, View, Controller
+    a) Identificar e Separar os módulos de acordo
+
+Na pasta Model, definir um tipo customizado chamado "Contato" que possua as seguintes
+propriedades:
+    a) nome
+    b) telefone
+
+    Utilizar esse tipo customizado agora para definir os contatos cadastrados na aplicação.

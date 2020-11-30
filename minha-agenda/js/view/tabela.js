@@ -1,4 +1,4 @@
-import * as moduloContatos from './contatos.js';
+import * as ContatosController from '../controller/ContatosController.js';
 
 const tabelaContatos = document.querySelector('#tabelaContatos');
 
@@ -6,7 +6,7 @@ exibirContatos();
 export function exibirContatos()
 {
     let tr = '';
-    const contatos = moduloContatos.getContatos();
+    const contatos = ContatosController.getContatos();
     
     contatos.forEach((contato, indice) => {
         tr += `
@@ -28,7 +28,7 @@ export function exibirContatos()
 tabelaContatos.addEventListener('click', (event) => {
     if (event.target.innerText.trim().toLowerCase() === 'excluir') {
         let indice = event.target.dataset.indice;
-        moduloContatos.removerContato(indice);
+        ContatosController.removerContato(indice);
         exibirContatos();
     }
 });
