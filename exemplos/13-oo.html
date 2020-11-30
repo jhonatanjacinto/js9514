@@ -6,15 +6,18 @@
     // Função Construtora de Objetos (ES5)
     function Carro(modelo = '', marca = '', ano = 0)
     {
+        // propriedades
         this.modelo = modelo;
         this.marca = marca;
         this.ano = ano;
-        this.andar = function() {
-            console.log('O carro ' + this.modelo + ' está andando...');
-        };
-        this.parar = function() {
-            console.log('O carro ' + this.modelo + ' está parando...');
-        }
+    }
+
+    // métodos no protótipo do Objeto
+    Carro.prototype.andar = function() {
+        console.log('O carro ' + this.modelo + ' está andando...');
+    }
+    Carro.prototype.parar = function() {
+        console.log('O carro ' + this.modelo + ' está parando...');
     }
 
     function registrarCarro(carro)

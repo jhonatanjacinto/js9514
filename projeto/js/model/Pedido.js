@@ -14,3 +14,7 @@ export default function Pedido()
     this.produtos = [];
     this.status = 1; // 1 = EM ANDAMENTO | 2 = FINALIZADO
 }
+
+Pedido.prototype.getTotal = function() {
+    return this.produtos.reduce((total, p) => total + (p.preco * p.quantidade), 0);
+}
