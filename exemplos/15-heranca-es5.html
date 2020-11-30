@@ -1,0 +1,42 @@
+<meta charset="utf-8">
+<h1>Herança ES5</h1>
+
+<script>
+
+    function Cliente(id, nome, email, senha, telefone)
+    {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+    }
+
+    Cliente.prototype.login = function() {
+        console.log('O cliente ' + this.nome + ' está logando...');
+    }
+
+    Cliente.prototype.logout = function() {
+        console.log('O cliente ' + this.nome + ' está saindo...');
+    }
+
+    Cliente.prototype.comprar = function() {
+        console.log('O cliente ' + this.nome + ' está comprando...');
+    }
+
+    // Classe-Filha
+    function ClienteVip(id, nome, email, senha, telefone, foto)
+    {
+        Cliente.call(this, id, nome, email, senha, telefone); // copia a estrutura de propriedades da classe-pai
+        this.foto = foto;
+    }
+
+    // Copia os métodos do protótipo da classe-pai
+    ClienteVip.prototype = Object.create(Cliente.prototype);
+    ClienteVip.prototype.constructor = ClienteVip;
+
+    ClienteVip.prototype.enviarMensagem = function() {
+        console.log('O cliente ' + this.nome + ' está enviando uma mensagem...');
+    }
+
+</script>

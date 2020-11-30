@@ -1,0 +1,36 @@
+<meta charset="utf-8">
+<h1>Tratamento de Erros</h1>
+
+<script>
+
+    class ValidacaoErro extends Error {
+        constructor(mensagem) {
+            super(mensagem);
+        }
+
+        // sobrescrita de método
+        toString() {
+            return this.message;
+        }
+    }
+
+    try 
+    {
+        var nome = prompt('Digite seu nome!');
+        if (nome.trim() === '') {
+            throw new ValidacaoErro('Por favor, digite um texto válido!'); // Erro customizado
+        }
+        console.log(sobrenome.toUpperCase()); // Erro de Sistema
+    }
+    catch(e)
+    {
+        if (e instanceof ValidacaoErro) {
+            alert(e);
+        }
+        else {
+            alert('Um erro inesperado aconteceu na aplicação. Por favor, contate o administrador!');
+            console.error(e);
+        }
+    }
+
+</script>

@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<h1>Herança ES6</h1>
+
+<script>
+
+    class Cliente {
+        constructor(id, nome, email, senha, telefone) {
+            this.id = id;
+            this.nome = nome;
+            this.email = email;
+            this.senha = senha;
+            this.telefone = telefone;
+        }
+
+        login() {
+            console.log('O cliente ' + this.nome + ' está logando...');
+        }
+
+        logout() {
+            console.log('O cliente ' + this.nome + ' está saindo...');
+        }
+
+        comprar() {
+            console.log('O cliente ' + this.nome + ' está comprando...');
+        }
+    }
+
+    // Classe-Filha
+    class ClienteVip extends Cliente {
+        constructor(id, nome, email, senha, telefone, foto) {
+            super(id, nome, email, senha, telefone);
+            this.foto = foto;
+        }
+
+        enviarMensagem() {
+            console.log('O cliente ' + this.nome + ' está enviando uma mensagem...');
+        }
+    }
+
+</script>
