@@ -1,0 +1,25 @@
+EXERCÍCIO 1 : Carregando a lista de usuários
+1) Guarde a referência do <select> e também da <div> "card-body" que vai mostrar as informações dos usuários
+2) No carregamento da página, faça uma requisição AJAX para a url "https://jsonplaceholder.typicode.com/users". Essa URL retorna um JSON com uma LISTA DE USUÁRIOS com várias informações.
+3) Para cada USUÁRIO da lista de usuários, crie um elemento <option>
+4) Configure o <option> criado para que ele receba como valor a propriedade "id" do Usuário e como conteúdo de texto a propriedade "name" do usuário 
+5) Coloque os <option> criados dentro do <select>
+TESTE E VEJA SE OS USUÁRIOS APARECEM COMO OPÇÕES DO SELECT 
+----------------------------------------------------------------------------------------
+
+EXERCÍCIO 2 : Mostrando os detalhes do usuário 
+1) Adicione um evento à referência do objeto <select> chamado "change". Ele é disparado toda vez que você selecionar uma opção do <select>
+2) Quando o evento "change" for disparado, pegue o valor do <select> e verifique se ele está vazio.
+3) SE estiver vazio, mostre a mensagem "Selecione um usuário para exibir seus dados aqui :)" dentro da <div> "card-body"
+4) Caso contrário, pegue o valor selecionado no <select> e faça uma nova requisição AJAX para a url "https://jsonplaceholder.typicode.com/users/ID_DO_USUARIO", informando o ID do usuário selecionado. Essa URL retorna um JSON com um único OBJETO contendo as informações desse usuário
+5) Exiba as informações desse usuário dentro da <div> "card-body" da seguinte maneira (um embaixo do outro):
+
+    NOME: [NOME_DO_USUARIO]
+    USERNAME: [USERNAME_DO_USUARIO]
+    E-MAIL: [EMAIL_DO_USUARIO]
+    CIDADE: [CIDADE_DO_USUARIO]
+    SITE: [SITE_DO_USUARIO]
+
+    Obs.: Acesse a URL da API passando um ID qualquer como teste (por exemplo, /users/1) para ver as propriedades do objeto retornado e saber como pegar cada uma das informações solicitadas nesse exercício.
+
+TESTE E VEJA SE AO SELECIONAR UM USUÁRIO NA LISTA, AS INFORMAÇÕES CORRESPONDENTES SÃO CARREGADAS NO CARD.

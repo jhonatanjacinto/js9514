@@ -1,0 +1,12 @@
+buscar as informações do cep na API
+https://viacep.com.br/ws/CEP_DIGITADO_PELO_USUARIO/json
+
+
+Exibir na <div> "conteudoEndereco" os seguintes dados:
+
+    ENDERECO NUMERO, BAIRRO - CIDADE / ESTADO
+
+
+Carregar no <iframe> (propriedade "src") a seguinte URL
+
+    https://www.google.com/maps/embed/v1/place?key=AIzaSyAAHU25u6912rHIn4Kv4Rh77pk8a5mUjFo&q=LOGRADOURO NUMERO,BAIRRO,CIDADE

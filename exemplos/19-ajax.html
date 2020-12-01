@@ -1,0 +1,52 @@
+<meta charset="utf-8">
+<h1>Ajax com JavaScript (ES5)</h1>
+
+<button id="btnCarregar">
+    Carregar dados Externos
+</button>
+<button id="btnTeste">
+    Exibir Alerta de Teste
+</button>
+
+<div id="mostrarDados">
+    Os dados serão carregados aqui...
+</div>
+
+<script>
+
+    btnTeste.onclick = () => alert('Mensagem de alerta teste....');
+
+    btnCarregar.onclick = () => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://jhonatanjacinto.dev/teste.cfm'); // assíncrono
+        xhr.send();
+        console.log('Carregando...');
+
+        xhr.onload = function() {
+            console.log('Dados carregados: ', xhr.response);
+        }
+    }
+
+    const promiseMensagem = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+
+            let aleatorio = parseInt(Math.random() * 10);
+            if (aleatorio % 2 === 0) {
+                resolve('O número sorteado é par: ' + aleatorio);
+            }
+            else {
+                reject('O número sorteado é impar: ' + aleatorio);
+            }
+
+        }, 5000);
+    });
+
+    promiseMensagem.then(resultado => {
+        console.log('SUCESSO', resultado);
+    })
+    .catch(erro => {
+        console.error('ERRO', erro);
+    });
+
+
+</script>

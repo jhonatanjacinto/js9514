@@ -1,0 +1,87 @@
+Conectar ao banco de dados
+    Retornar do banco de dados as cadeiras disponíveis
+        Registrar interesse na cadeira 53
+            Processar pagamento
+                Cadeira registrada com sucesso para Jhonatan
+
+
+// CALLBACK HELL
+db.onconectar = function() {
+    dados = db.getCadeiras();
+    dados.oncarregar = function() {
+        acao = dados.registrarCadeira(53)
+        acao.onregistrado = function() {
+            acaoPagamento = pagamento.realizarPagamento();
+            acaoPagamento.onpago = function() {
+                console.log('Cadeira registrada com sucesso');
+            }
+            acaoPagamento.onerror = function() {
+
+            }
+        }
+        acao.onerror = function() {
+
+        }
+    }
+    dados.onerror = function() {
+
+    }
+}
+
+db.onerror = function() {
+
+}
+
+
+// PROMISES (ES6)
+    1) fulfilled: sucesso
+    2) rejected: erro
+
+    then() = chamado quando a promise tem estado "fulfilled"
+    catch() = chamando quando a promise (ou a cadeia de promises) retorna "rejected"
+
+    db.conectar()
+        .then(function() {
+            return db.getCadeiras()
+        })
+        .then(function(dados) {
+            return dados.registrarCadeira(53)
+        })
+        .then(function(pagamento) {
+            return pagamento.realizarPagamento();
+        })
+        .then(function() {
+            console.log('Cadeira registrada com sucesso!');
+        })
+        .catch(erro => {
+            console.log(erro);
+        });
+
+// ASYNC AWAIT
+
+    1) await só pode ser usado dentro de funções marcadas com async 
+    2) await deve ser usado antes de objetos PROMISE ou funções que retornam objetos desse tipo
+    3) async só pode estar associado a funções ou arrow functions 
+
+    Obs.: TOP-LEVEL AWAIT 
+
+    async function processarPassos()
+    {
+        try
+        {
+            
+            p1 = db.conectar();
+            p2 = db2.conectar();
+
+            await Promise.any(p1, p2);
+            const dados = await db.getCadeiras();
+            const pagamento = await dados.registrarCadeira(53);
+            await pagamento.realizarPagamento();
+            console.log('Cadeira registrada com sucesso!');
+        }
+        catch(erro) {
+            console.error(erro);
+        }
+    }
+
+    processarPassos();

@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<h1>Fetch API / Async Await (ES7+)</h1>
+
+<button id="btnCarregar">
+    Carregar dados Externos
+</button>
+<button id="btnTeste">
+    Exibir Alerta de Teste
+</button>
+
+<div id="mostrarDados">
+    Os dados serão carregados aqui...
+</div>
+
+<script>
+
+    btnCarregar.onclick = async () => {
+        console.log('Carregando...');
+        try {
+            const respostaServidor = await fetch('https://jhonatanjacinto.dev/teste.cfm');
+            let html = await respostaServidor.text();
+            mostrarDados.innerHTML = html;
+        }
+        catch(erro) {
+            console.error(erro);
+        }
+    }
+
+</script>

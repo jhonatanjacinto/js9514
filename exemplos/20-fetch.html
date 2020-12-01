@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<h1>Fetch API (ES6)</h1>
+
+<button id="btnCarregar">
+    Carregar dados Externos
+</button>
+<button id="btnTeste">
+    Exibir Alerta de Teste
+</button>
+
+<div id="mostrarDados">
+    Os dados serão carregados aqui...
+</div>
+
+<script>
+
+    btnCarregar.onclick = () => {
+        console.log('Carregando...');
+        fetch('https://jhonatanjacinto.dev/teste.cfm')
+            .then(respostaServidor => respostaServidor.text())
+            .then(html => {
+                console.log('Dados carregados: ', html);
+            })
+            .catch(erro => {
+                console.error(erro);
+            });
+    }
+
+</script>
