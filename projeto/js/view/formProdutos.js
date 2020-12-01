@@ -3,6 +3,7 @@ import * as ProdutosController from '../controller/ProdutosController.js';
 import { exibirProdutosDoPedido } from './tabelaProdutosPedido.js';
 import { formataMoeda } from '../utils/formataMoeda.js';
 import ProdutoError from '../model/ProdutoError.js';
+import PedidoError from '../model/PedidoError.js';
 
 const seletor_produto = document.querySelector('#seletor_produto');
 const btnAdicionarProduto = document.querySelector('#btnAdicionarProduto');
@@ -34,7 +35,7 @@ btnAdicionarProduto.addEventListener('click', function() {
     }
     catch(erro) 
     {
-        if (erro instanceof ProdutoError) {
+        if (erro instanceof ProdutoError || erro instanceof PedidoError) {
             alert(erro);
         }
         else {

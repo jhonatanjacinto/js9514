@@ -1,6 +1,6 @@
 import Pedido from "../model/Pedido.js";
 import Produto from "../model/Produto.js";
-import ProdutoError from "../model/ProdutoError.js";
+import PedidoError from "../model/PedidoError.js";
 
 /** @type {Pedido} */
 const pedido = JSON.parse(localStorage.getItem('dados_pedido')) ?? new Pedido();
@@ -14,7 +14,7 @@ Object.setPrototypeOf(pedido, Pedido.prototype);
 export function adicionarProduto(produto)
 {
     if (produto.quantidade <= 0  || isNaN(produto.quantidade)) {
-        throw new ProdutoError('Quantidade do produto informada é inválida. Selecione um valor maior ou igual a 1.');
+        throw new PedidoError('Quantidade do produto informada é inválida. Selecione um valor maior ou igual a 1.');
     }
     
     let posicaoProduto = pedido.produtos.findIndex(p => p.id === produto.id);
@@ -55,7 +55,7 @@ export function getTotal()
 export function removerProduto(indice)
 {
     if (isNaN(indice) || indice < 0 || indice >= pedido.produtos.length) {
-        alert('Posição informada é inválida!');
+        throw new PedidoError('Produto informado para remoção é inválido!');
     }
     else {
         pedido.produtos.splice(indice, 1);

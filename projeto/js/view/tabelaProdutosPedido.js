@@ -34,8 +34,21 @@ export function exibirProdutosDoPedido()
 }
 
 tbodyProdutos.addEventListener('click', ({ target: { innerText, dataset: { indice } } }) => {
-    if (innerText.trim().toLowerCase() === 'remover') {
-        PedidoController.removerProduto(indice);
-        exibirProdutosDoPedido();
+    try 
+    {
+        if (innerText.trim().toLowerCase() === 'remover') {
+            PedidoController.removerProduto(indice);
+            exibirProdutosDoPedido();
+        }
+    }
+    catch(erro)
+    {
+        if (erro instanceof PedidoError) {
+            alert(erro);
+        }
+        else {
+            alert('Não foi possível remover o produto do seu pedido. Por favor, contate o administrador!');
+            console.error(erro);
+        }
     }
 });

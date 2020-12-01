@@ -1,0 +1,50 @@
+<meta charset="utf-8">
+<h1>Private Fields - ES2020</h1>
+
+<script>
+
+    class Usuario {
+        // propriedades privadas
+        #id = 0;
+        #email = null;
+        #senha = null;
+
+        constructor(id = 0, email = null, senha = null) {
+            if (id) this.id = id;
+            if (email) this.email = email;
+            if (senha) this.senha = senha;
+        }
+
+        get id() {
+            return this.#id;
+        }
+
+        set id(valor) {
+            if (valor <= 0 || isNaN(valor)) {
+                throw new Error('ID do usuário é inválido!');
+            }
+            this.#id = valor;
+        }
+
+        get email() {
+            return this.#email;
+        }
+
+        set email(valor) {
+            if (typeof valor !== 'string' || !valor.trim()) {
+                throw new Error('E-mail inválido!');
+            }
+            this.#email = valor;
+        }
+
+        // método privado
+        #dizerOla() {
+            console.log('A classe usuário disse Olá!!!');
+        }
+    }
+
+    const usuario = new Usuario();
+    usuario.id = 5;
+    usuario.email = 'jhonatan@teste.com.br';
+
+</script>
