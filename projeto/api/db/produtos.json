@@ -1,1 +1,7 @@
-[]
+[
+    { "id": 1, "nome": "Pizza de Calabresa", "foto": "pizza-calabresa.jpg", "preco": 52.99 },
+    { "id": 2, "nome": "Pizza 4 Queijos", "foto": "pizza-4-queijos.jpg", "preco": 65.82 },
+    { "id": 3, "nome": "Pizza de Frango Catupiry", "foto": "pizza-frango-catupiry.jpg", "preco": 45.93 },
+    { "id": 4, "nome": "Pizza Marguerita", "foto": "pizza-marguerita.jpg", "preco": 32.75 },
+    { "id": 5, "nome": "Pizza Portuguesa'", "foto": "pizza-portuguesa.jpg", "preco": 55.99 }
+]
