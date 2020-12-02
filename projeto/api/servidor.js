@@ -6,5 +6,5 @@ const app = http.createServer((request, response) => {
     
 });
 
-app.listen(8888);
-console.log('Servidor da api está rodando na url http://localhost:8888/');
+app.listen(8008);
+console.log('Servidor da api está rodando na url http://localhost:8008/');
