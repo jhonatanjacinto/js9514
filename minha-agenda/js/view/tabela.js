@@ -1,4 +1,5 @@
 import * as ContatosController from '../controller/ContatosController.js';
+import ContatoError from '../model/ContatoError.js';
 
 const tabelaContatos = document.querySelector('#tabelaContatos');
 
@@ -26,9 +27,20 @@ export function exibirContatos()
 }
 
 tabelaContatos.addEventListener('click', (event) => {
-    if (event.target.innerText.trim().toLowerCase() === 'excluir') {
-        let indice = event.target.dataset.indice;
-        ContatosController.removerContato(indice);
-        exibirContatos();
+    try {
+        if (event.target.innerText.trim().toLowerCase() === 'excluir') {
+            let indice = event.target.dataset.indice;
+            ContatosController.removerContato(indice);
+            exibirContatos();
+        }
+    }
+    catch(e) {
+        if (e instanceof ContatoError) {
+            alert(e);
+        }
+        else {
+            alert('Um erro inesperado ocorreu ao realizar a remoção do contato. Tente novamente mais tarde.');
+            console.error(e);
+        }
     }
 });
