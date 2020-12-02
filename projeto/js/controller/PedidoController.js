@@ -62,3 +62,14 @@ export function removerProduto(indice)
         localStorage.setItem('dados_pedido', JSON.stringify(pedido));
     }
 }
+
+export async function enviarPedido(formPedido)
+{
+    for (let propriedade in formPedido)
+    {
+        let propriedade_ref = propriedade.replace(/(input_|seletor_)/g, '');
+        pedido[propriedade_ref] = formPedido[propriedade].value;
+    }
+
+    // Back-end
+}
