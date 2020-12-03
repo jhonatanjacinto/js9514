@@ -1,0 +1,15 @@
+1) Servidor NODE (testa)
+2) Services (Front-end)
+3) Controller (Front-end)
+4) View
+
+Back-end
+    /api/contatos GET = Retorno dos contatos salvos 
+    /api/contatos POST = Envio de um novo contato 
+
+Front-end
+    /services/ContatosService.js = Busca e envio de dados para o back-end
+
+    /controller/ContatosController = Modificações para envio das informações coletadas para o service. Deixar de salvar os dados no localStorage
+
+    /view/tabela.js = Exibir a lista de contatos vinda do servidor
