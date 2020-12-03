@@ -1,7 +1,8 @@
 import Contato from "../model/Contato.js";
 import ContatoError from "../model/ContatoError.js";
+import * as ContatosService from "../services/ContatosService.js";
 
-const contatos = JSON.parse(localStorage.getItem('dados_contatos')) || [];
+let contatos = [];
 
 /**
  * Adiciona um Contato à Agenda
@@ -28,7 +29,7 @@ export function adicionarContato(nome, telefone)
         contatos.push(infoContato);
     }
 
-    localStorage.setItem('dados_contatos', JSON.stringify(contatos));
+    // ENVIAR O infoContato para o BACK-END
 }
 
 export function removerContato(indice)
@@ -38,14 +39,16 @@ export function removerContato(indice)
     }
 
     contatos.splice(indice, 1);
-    localStorage.setItem('dados_contatos', JSON.stringify(contatos));
+    // REMOÇÃO da informação no BACK-END
 }
 
 /**
  * Retorna a lista de contatos salva na Agenda
- * @returns {Array<Contato>}
+ * @returns {Promise<Array<Contato>>}
  */
-export function getContatos()
+export async function getContatos()
 {
+    // CONSULTAR OS DADOS NO BACK-END
+    contatos = await ContatosService.getContatos();
     return contatos;
 }

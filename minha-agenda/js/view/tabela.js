@@ -4,10 +4,10 @@ import ContatoError from '../model/ContatoError.js';
 const tabelaContatos = document.querySelector('#tabelaContatos');
 
 exibirContatos();
-export function exibirContatos()
+export async function exibirContatos()
 {
     let tr = '';
-    const contatos = ContatosController.getContatos();
+    const contatos = await ContatosController.getContatos();
     
     contatos.forEach((contato, indice) => {
         tr += `
