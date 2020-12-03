@@ -9,18 +9,22 @@ const seletor_produto = document.querySelector('#seletor_produto');
 const btnAdicionarProduto = document.querySelector('#btnAdicionarProduto');
 const input_quantidade = document.querySelector('#input_quantidade');
 
-let opcoes_select = '';
-const listaProdutos = ProdutosController.getListaProdutos();
 
-listaProdutos.forEach(produto => {
-    opcoes_select += `
-        <option value="${produto.id}">
-            ${produto.nome} - ${formataMoeda(produto.preco)}
-        </option>
-    `;
-});
+(async () => {
+    let opcoes_select = '';
+    const listaProdutos = await ProdutosController.getListaProdutos();
 
-seletor_produto.innerHTML = opcoes_select;
+    listaProdutos.forEach(produto => {
+        opcoes_select += `
+            <option value="${produto.id}">
+                ${produto.nome} - ${formataMoeda(produto.preco)}
+            </option>
+        `;
+    });
+
+    seletor_produto.innerHTML = opcoes_select;
+})();
+
 
 btnAdicionarProduto.addEventListener('click', function() {
     try 

@@ -1,6 +1,7 @@
 import Pedido from "../model/Pedido.js";
 import Produto from "../model/Produto.js";
 import PedidoError from "../model/PedidoError.js";
+import { salvarPedido } from "../services/PedidosService.js";
 
 /** @type {Pedido} */
 const pedido = JSON.parse(localStorage.getItem('dados_pedido')) ?? new Pedido();
@@ -71,5 +72,20 @@ export async function enviarPedido(formPedido)
         pedido[propriedade_ref] = formPedido[propriedade].value;
     }
 
+    if (pedido.produtos.length < 1) 
+    {
+        throw new PedidoError('Seu pedido precisa pelo menos ter 1 produto adicionado!', pedido);
+    }
+
     // Back-end
+    const status = await salvarPedido(pedido);
+    console.log(status);
+
+    let codigoPedido = pedido.id;
+    localStorage.removeItem('dados_pedido');
+    
+    // Transfere as propriedades de um objeto para outro
+    Object.assign(pedido, new Pedido);
+
+    return codigoPedido;
 }

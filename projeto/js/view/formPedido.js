@@ -3,6 +3,10 @@ import * as ValidacaoController from '../controller/ValidacaoController.js';
 import * as PedidoController from '../controller/PedidoController.js';
 import CorreiosError from '../model/CorreiosError.js';
 import ValidacaoError from '../model/ValidacaoError.js';
+import PedidoError from '../model/PedidoError.js';
+import Pedido from '../model/Pedido.js';
+import { exibirCodigoPedido } from './divFinalizacaoPedido.js';
+import { exibirProdutosDoPedido } from './tabelaProdutosPedido.js';
 
 // guardar as referências da interface HTML
 const btnEnviarPedido = document.querySelector('#btnEnviarPedido');
@@ -51,17 +55,21 @@ formPedido.input_cep.addEventListener('change', async () => {
  * Quando o usuário clicar no botão de envio do pedido, pegamos as informações e validamos
  * antes de realizar o envio para o back-end da aplicação
  */
-btnEnviarPedido.addEventListener('click', () => {
+btnEnviarPedido.addEventListener('click', async () => {
     try 
     {
         ValidacaoController.validarCampos(camposObrigatorios);
-        PedidoController.enviarPedido(formPedido);
+        let codigoPedido = await PedidoController.enviarPedido(formPedido);
+        exibirCodigoPedido(codigoPedido);
+        exibirProdutosDoPedido();
+        todosOsCampos.forEach(campo => campo.value = '');
     }
     catch(e)
     {
-        if (e instanceof ValidacaoError) {
+        if (e instanceof ValidacaoError || e instanceof PedidoError) {
             alert(e);
-            e.campo.focus();
+            // optional chaining
+            e?.campo?.focus?.();
         }
         else {
             alert('Erro inesperado ao enviar informações do pedido. Tente novamente!');
