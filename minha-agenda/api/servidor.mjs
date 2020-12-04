@@ -9,6 +9,7 @@ const app = http.createServer((request, response) => {
 
     let urlAcessada = url.parse(request.url).pathname;
     let metodo = request.method; // GET, POST, PUT, DELETE
+    let query = url.parse(request.url, true).query;
     const responseConfig = {
         'Content-type' : 'application/json; charset=utf8',
         'Access-Control-Allow-Origin' : '*',
@@ -26,12 +27,12 @@ const app = http.createServer((request, response) => {
             response.end(listaContatosJson);
         }
 
-        else if (metodo === 'POST')
+        else if (metodo === 'POST' && query.contato)
         {
             // grava um novo contato no arquivo json
             // api/contatos?contato=[OBJETO JSON]
             let listaContatosJson = fs.readFileSync('./db/contatos.json', 'utf-8');
-            let jsonContato = url.parse(request.url, true).query.contato;
+            let jsonContato = query.contato;
 
             const listaContatos = JSON.parse(listaContatosJson);
             const contato = JSON.parse(jsonContato);
@@ -51,11 +52,11 @@ const app = http.createServer((request, response) => {
             response.end(JSON.stringify(resposta));
         }
 
-        else if (metodo === 'DELETE')
+        else if (metodo === 'POST' && query.posicao)
         {
             // api/contatos?posicao=[INDICE DO ARRAY]
             let listaContatosJson = fs.readFileSync('./db/contatos.json', 'utf-8');
-            let posicao = url.parse(request.url, true).query.posicao;
+            let posicao = query.posicao;
 
             let resposta = {};
             const listaContatos = JSON.parse(listaContatosJson);
@@ -71,7 +72,6 @@ const app = http.createServer((request, response) => {
                 fs.writeFileSync('./db/contatos.json', JSON.stringify(listaContatos), 'utf-8');
             }
 
-            console.log(resposta);
             response.end(JSON.stringify(resposta));
         }
     }
