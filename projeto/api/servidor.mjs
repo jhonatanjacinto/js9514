@@ -47,6 +47,26 @@ const app = http.createServer((request, response) => {
             const resposta = { status: 1, mensagem: 'Pedido salvo com sucesso!' };
             response.end(JSON.stringify(resposta));
         }
+
+        else if (urlAcessada === '/api/status-pedido') 
+        {
+            // api/status-pedido?codigo=[CODIGO DO PEDIDO]
+            let codigo = url.parse(request.url, true).query.codigo;
+            let listaDePedidosJson = fs.readFileSync('./db/pedidos.json', 'utf-8');
+            const listaDePedidos = JSON.parse(listaDePedidosJson);
+
+            const pedidoSelecionado = listaDePedidos.find(p => p.id == codigo);
+
+            if (pedidoSelecionado) {
+                let msg = pedidoSelecionado.status == 1 ? 'EM ANDAMENTO' : 'FINALIZADO';
+                const resposta = { status: 1, mensagem: msg, statusPedido: pedidoSelecionado.status };
+                response.end(JSON.stringify(resposta));
+            }
+            else {
+                const resposta = { status: 0, mensagem: 'Pedido não encontrado!' };
+                response.end(JSON.stringify(resposta));
+            }
+        }
     }
     else 
     {

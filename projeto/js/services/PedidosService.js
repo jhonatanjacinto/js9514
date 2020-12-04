@@ -18,3 +18,20 @@ export async function salvarPedido(pedido)
     
     return statusServidor;
 }
+
+/**
+ * Retorna o status do pedido informado
+ * @param {string} codigo Código do pedido a ser consultado
+ * @returns {Promise<Object>}
+ */
+export async function getStatusPedido(codigo)
+{
+    const parametros = new URLSearchParams();
+    parametros.append('codigo', codigo);
+
+    let urlGet = 'http://localhost:8008/api/status-pedido?' + parametros;
+    const resposta = await fetch(urlGet);
+    const statusServidor = await resposta.json();
+
+    return statusServidor;
+}

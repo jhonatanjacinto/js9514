@@ -1,7 +1,7 @@
 import Pedido from "../model/Pedido.js";
 import Produto from "../model/Produto.js";
 import PedidoError from "../model/PedidoError.js";
-import { salvarPedido } from "../services/PedidosService.js";
+import { getStatusPedido, salvarPedido } from "../services/PedidosService.js";
 
 /** @type {Pedido} */
 const pedido = JSON.parse(localStorage.getItem('dados_pedido')) ?? new Pedido();
@@ -64,6 +64,11 @@ export function removerProduto(indice)
     }
 }
 
+/**
+ * Envia as informações do pedido para salvamento no back-end
+ * @param {Array<Element>} formPedido Array de elementos HTML para coleta das informações do pedido
+ * @returns {Promise<string>}
+ */
 export async function enviarPedido(formPedido)
 {
     for (let propriedade in formPedido)
@@ -88,4 +93,24 @@ export async function enviarPedido(formPedido)
     Object.assign(pedido, new Pedido);
 
     return codigoPedido;
+}
+
+/**
+ * Consulta um pedido e retorna o seu status atual
+ * @param {string} codigo Código do Pedido a ser consultado no back-end
+ * @returns {Promise<Object>}
+ */
+export async function getStatus(codigo)
+{
+    if (!codigo) {
+        throw new PedidoError('Código do Pedido é obrigatório!');
+    }
+
+    const respostaServidor = await getStatusPedido(codigo);
+
+    if (respostaServidor.status === 0) {
+        throw new PedidoError(respostaServidor.mensagem);
+    }
+
+    return respostaServidor;
 }
