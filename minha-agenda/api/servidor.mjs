@@ -11,8 +11,9 @@ const app = http.createServer((request, response) => {
     let metodo = request.method; // GET, POST, PUT, DELETE
     const responseConfig = {
         'Content-type' : 'application/json; charset=utf8',
-        'Access-Control-Allow-Origin' : '*'
-    }
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods' : 'GET, POST, DELETE'
+    };
 
     if (urls_validas.includes(urlAcessada))
     {
@@ -35,12 +36,42 @@ const app = http.createServer((request, response) => {
             const listaContatos = JSON.parse(listaContatosJson);
             const contato = JSON.parse(jsonContato);
 
-            listaContatos.push(contato);
+            let posicaoContato = listaContatos.findIndex(c => c.nome.toUpperCase() === contato.nome.toUpperCase());
+            if (posicaoContato >= 0) {
+                listaContatos[posicaoContato] = contato;
+            }
+            else {
+                listaContatos.push(contato);
+            }
 
             listaContatosJson = JSON.stringify(listaContatos);
             fs.writeFileSync('./db/contatos.json', listaContatosJson, 'utf-8');
 
             const resposta = { status: 1, mensagem: 'Contato salvo com sucesso!' };
+            response.end(JSON.stringify(resposta));
+        }
+
+        else if (metodo === 'DELETE')
+        {
+            // api/contatos?posicao=[INDICE DO ARRAY]
+            let listaContatosJson = fs.readFileSync('./db/contatos.json', 'utf-8');
+            let posicao = url.parse(request.url, true).query.posicao;
+
+            let resposta = {};
+            const listaContatos = JSON.parse(listaContatosJson);
+
+            if (isNaN(posicao) || posicao < 0 || posicao >= listaContatos.length) {
+                // status de erro na operação
+                resposta = { status: 0, mensagem: 'Posição fornecida é inválida para remoção do contato!' };
+            }
+            else {
+                // excluir o item e retornar sucesso
+                resposta = { status: 1, mensagem: 'Contato excluído com sucesso!' };
+                listaContatos.splice(posicao, 1);
+                fs.writeFileSync('./db/contatos.json', JSON.stringify(listaContatos), 'utf-8');
+            }
+
+            console.log(resposta);
             response.end(JSON.stringify(resposta));
         }
     }
