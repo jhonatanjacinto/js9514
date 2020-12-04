@@ -1,7 +1,7 @@
 import Pedido from "../model/Pedido.js";
 import Produto from "../model/Produto.js";
 import PedidoError from "../model/PedidoError.js";
-import { getStatusPedido, salvarPedido } from "../services/PedidosService.js";
+import { atualizarStatusPedido, getPedidos, getStatusPedido, salvarPedido } from "../services/PedidosService.js";
 
 /** @type {Pedido} */
 const pedido = JSON.parse(localStorage.getItem('dados_pedido')) ?? new Pedido();
@@ -107,6 +107,42 @@ export async function getStatus(codigo)
     }
 
     const respostaServidor = await getStatusPedido(codigo);
+
+    if (respostaServidor.status === 0) {
+        throw new PedidoError(respostaServidor.mensagem);
+    }
+
+    return respostaServidor;
+}
+
+/**
+ * Retorna uma lista de Pedidos registrados no servidor
+ * @returns {Promise<Array<Pedido>>}
+ */
+export async function getListaPedidos()
+{
+    const listaPedidosServidor = await getPedidos();
+    const listaPedidos = listaPedidosServidor.map(pe => Object.setPrototypeOf(pe, Pedido.prototype));
+    return listaPedidos;
+}
+
+/**
+ * Valida as informações de alteração e atualiza o status do pedido no back-end
+ * @param {number} statusNovo Status novo do pedido
+ * @param {string} codigoPedido Pedido a ser alterado
+ * @returns {Promise<Object>}
+ */
+export async function alterarStatus(statusNovo, codigoPedido)
+{
+    if (!statusNovo) {
+        throw new PedidoError('Status informado é inválido!');
+    }
+
+    if (!codigoPedido) {
+        throw new PedidoError('Código do Pedido informado é inválido!');
+    }
+
+    const respostaServidor = await atualizarStatusPedido(statusNovo, codigoPedido);
 
     if (respostaServidor.status === 0) {
         throw new PedidoError(respostaServidor.mensagem);

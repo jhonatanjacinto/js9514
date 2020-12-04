@@ -6,7 +6,8 @@ const app = http.createServer((request, response) => {
     const urls_validas = [
         '/api/produtos', // retorna a lista de produtos
         '/api/pedidos', // retorna a lista de pedidos OU envia um pedido para ser salvo no servidor
-        '/api/status-pedido' // retorna o status de um pedido específico
+        '/api/status-pedido', // retorna o status de um pedido específico
+        '/api/alterar-status-pedido' // altera o status de um pedido no back-end
     ];
 
     let urlAcessada = url.parse(request.url).pathname;
@@ -64,6 +65,30 @@ const app = http.createServer((request, response) => {
             }
             else {
                 const resposta = { status: 0, mensagem: 'Pedido não encontrado!' };
+                response.end(JSON.stringify(resposta));
+            }
+        }
+
+        else if (urlAcessada === '/api/alterar-status-pedido')
+        {
+            // api/alterar-status-pedido?statusNovo=[STATUS]&codigo=[PEDIDO A SER ALTERADO]
+            let codigo = url.parse(request.url, true).query.codigo;
+            let statusNovo = parseInt(url.parse(request.url, true).query.statusNovo);
+            let listaDePedidosJson = fs.readFileSync('./db/pedidos.json', 'utf-8');
+            const listaDePedidos = JSON.parse(listaDePedidosJson);
+
+            const posicaoPedido = listaDePedidos.findIndex(p => p.id == codigo);
+            
+            if (posicaoPedido >= 0) 
+            {
+                listaDePedidos[posicaoPedido].status = statusNovo;
+                fs.writeFileSync('./db/pedidos.json', JSON.stringify(listaDePedidos), 'utf-8');
+                const resposta = { status: 1, mensagem: 'Status do pedido atualizado com sucesso!' };
+                response.end(JSON.stringify(resposta));
+            }
+            else
+            {
+                const resposta = { status: 0, mensagem: 'Pedido não encontrado para realizar a alteração do status!' };
                 response.end(JSON.stringify(resposta));
             }
         }
