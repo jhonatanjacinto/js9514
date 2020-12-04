@@ -6,13 +6,13 @@ const inputNome = document.querySelector('#inputNome');
 const inputTelefone = document.querySelector('#inputTelefone');
 const btnSalvar = document.querySelector('#btnSalvar');
 
-btnSalvar.addEventListener('click', function() {
+btnSalvar.addEventListener('click', async function() {
     try {
         let nome = inputNome.value.trim();
         let telefone = inputTelefone.value.trim();
 
-        ContatosController.adicionarContato(nome, telefone);
-        exibirContatos();
+        await ContatosController.adicionarContato(nome, telefone);
+        await exibirContatos();
     }
     catch(e) {
         if (e instanceof ContatoError) {

@@ -8,9 +8,9 @@ let contatos = [];
  * Adiciona um Contato à Agenda
  * @param {string} nome Nome do contato a ser registrado
  * @param {string} telefone Telefone do Contato a ser registrado
- * @returns {void}
+ * @returns {Promise<void>}
  */
-export function adicionarContato(nome, telefone) 
+export async function adicionarContato(nome, telefone) 
 {
     if (nome === '') {
         throw new ContatoError('Nome é obrigatório!');
@@ -20,26 +20,22 @@ export function adicionarContato(nome, telefone)
     }
 
     const infoContato = new Contato(nome, telefone);
-    let posicaoContato = contatos.findIndex(c => c.nome.toUpperCase() === nome.toUpperCase());
-
-    if (posicaoContato >= 0) {
-        contatos[posicaoContato] = infoContato;
-    }
-    else {
-        contatos.push(infoContato);
-    }
-
-    // ENVIAR O infoContato para o BACK-END
+    const status = await ContatosService.salvarContato(infoContato);
+    console.log(status);
 }
 
-export function removerContato(indice)
+/**
+ * Remove um contato na base de dados do servidor
+ * @param {number} indice Posição do contato a ser removido
+ * @returns {Promise<void>}
+ */
+export async function removerContato(indice)
 {
-    if (isNaN(indice) || indice < 0 || indice >= contatos.length) {
-        throw new ContatoError('Contato inválido para remoção!');
+    const respostaServidor = await ContatosService.removerContato(indice);
+    if (respostaServidor.status === 0) {
+        throw new ContatoError(respostaServidor.mensagem);
     }
-
-    contatos.splice(indice, 1);
-    // REMOÇÃO da informação no BACK-END
+    console.log(respostaServidor);
 }
 
 /**

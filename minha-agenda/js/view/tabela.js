@@ -26,12 +26,12 @@ export async function exibirContatos()
     tabelaContatos.innerHTML = tr;
 }
 
-tabelaContatos.addEventListener('click', (event) => {
+tabelaContatos.addEventListener('click', async (event) => {
     try {
         if (event.target.innerText.trim().toLowerCase() === 'excluir') {
             let indice = event.target.dataset.indice;
-            ContatosController.removerContato(indice);
-            exibirContatos();
+            await ContatosController.removerContato(indice);
+            await exibirContatos();
         }
     }
     catch(e) {
