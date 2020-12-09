@@ -21,8 +21,7 @@ const app = http.createServer((request, response) => {
     // DELETE, PUT, HEAD e o escambal
     if (metodo === 'OPTIONS') {
         response.writeHead(200, responseConfig);
-        response.end(JSON.stringify({ status: 'OPTIONS is allowed' }));
-        return;
+        response.end();
     }
 
     if (urls_validas.includes(urlAcessada))
