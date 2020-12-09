@@ -8,13 +8,22 @@ const app = http.createServer((request, response) => {
     ];
 
     let urlAcessada = url.parse(request.url).pathname;
-    let metodo = request.method; // GET, POST, PUT, DELETE
+    let metodo = request.method; // GET, POST, PUT, DELETE...
     let query = url.parse(request.url, true).query;
     const responseConfig = {
         'Content-type' : 'application/json; charset=utf8',
         'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods' : 'GET, POST, DELETE'
+        'Access-Control-Allow-Methods' : 'HEAD, GET, PUT, PATCH, POST, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers' : '*'
     };
+
+    // Retorna um status 200 pra indicar que o servidor aceita requisições
+    // DELETE, PUT, HEAD e o escambal
+    if (metodo === 'OPTIONS') {
+        response.writeHead(200, responseConfig);
+        response.end(JSON.stringify({ status: 'OPTIONS is allowed' }));
+        return;
+    }
 
     if (urls_validas.includes(urlAcessada))
     {
@@ -52,7 +61,7 @@ const app = http.createServer((request, response) => {
             response.end(JSON.stringify(resposta));
         }
 
-        else if (metodo === 'POST' && query.posicao)
+        else if (metodo === 'DELETE' && query.posicao)
         {
             // api/contatos?posicao=[INDICE DO ARRAY]
             let listaContatosJson = fs.readFileSync('./db/contatos.json', 'utf-8');
@@ -77,9 +86,8 @@ const app = http.createServer((request, response) => {
     }
     else 
     {
-        response.writeHead(400, responseConfig); // Bad Request
-        const data = { status: 0, message: 'Bad Request' };
-        response.end(JSON.stringify(data));
+        response.writeHead(400, responseConfig);
+        response.end(JSON.stringify({ status: 0, mensagem: 'Bad Request' }))
     }
 });
 

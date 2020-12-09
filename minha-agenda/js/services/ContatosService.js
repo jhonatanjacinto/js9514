@@ -39,7 +39,7 @@ export async function removerContato(posicao)
     parametros.append('posicao', posicao);
 
     let urlDelete = URL_BASE + '?' + parametros;
-    const response = await fetch(urlDelete, { method: 'POST' });
+    const response = await fetch(urlDelete, { method: 'DELETE' });
     const status = await response.json(); 
     return status;
 }
