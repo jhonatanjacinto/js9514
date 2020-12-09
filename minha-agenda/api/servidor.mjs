@@ -18,7 +18,7 @@ const app = http.createServer((request, response) => {
     };
 
     // Retorna um status 200 pra indicar que o servidor aceita requisições
-    // DELETE, PUT, HEAD e o escambal
+    // DELETE, PUT, HEAD e o escambal (pre-flight)
     if (metodo === 'OPTIONS') {
         response.writeHead(200, responseConfig);
         response.end();
